@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Projects | Jaideep Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   GLOBAL THEME
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+--bg:#070716;
+--card:#0d0d22;
+--text:#fff;
+--gray:#b9b9c9;
+--pink:#ff4ecd;
+--blue:#5b9cff;
+--cyan:#00f0ff;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+/* glow */
+body::before{
+content:'';
+position:fixed;
+top:-200px;
+left:-200px;
+width:500px;
+height:500px;
+background:#5b9cff22;
+filter:blur(120px);
+z-index:-1;
+}
+
+body::after{
+content:'';
+position:fixed;
+bottom:-200px;
+right:-200px;
+width:500px;
+height:500px;
+background:#ff4ecd22;
+filter:blur(120px);
+z-index:-1;
+}
+
+/* =========================
+   PAGE WRAPPER
+========================= */
+
+.projects-page{
+padding:120px 80px;
+max-width:1500px;
+margin:auto;
+}
+
+/* TITLE */
+
+.title{
+text-align:center;
+font-size:55px;
+margin-bottom:10px;
+}
+
+.title span{
+background:linear-gradient(45deg,var(--pink),var(--blue));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+text-align:center;
+color:#aaa;
+margin-bottom:60px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.project-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+}
+
+/* CARD */
+.card{
+background:#0d0d22;
+border-radius:25px;
+overflow:hidden;
+position:relative;
+transition:0.3s;
+cursor:pointer;
+}
+
+.card::before{
+content:'';
+position:absolute;
+inset:0;
+padding:2px;
+border-radius:25px;
+background:linear-gradient(45deg,var(--pink),var(--blue),var(--cyan));
+
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+
+pointer-events:none; 
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 35px #5b9cff33;
+}
+
+/* IMAGE */
+.card img{
+width:100%;
+height:240px;
+object-fit:cover;
+display:block;
+}
+
+/* CONTENT */
+.card-content{
+padding:25px;
+}
+
+.card-content h3{
+font-size:22px;
+margin-bottom:10px;
+}
+
+.card-content p{
+color:#aaa;
+font-size:14px;
+line-height:1.7;
+margin-bottom:15px;
+}
+
+/* TAGS */
+.tags{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:15px;
+}
+
+.tags span{
+font-size:12px;
+padding:6px 12px;
+border-radius:20px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(91,156,255,0.35);
+}
+
+/* BUTTONS */
+.buttons{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:10px 18px;
+border-radius:30px;
+text-decoration:none;
+font-size:13px;
+transition:0.3s;
+}
+
+.btn-primary{
+background:linear-gradient(45deg,var(--pink),var(--blue));
+color:#fff;
+}
+
+.btn-secondary{
+border:1px solid rgba(255,255,255,0.2);
+color:#fff;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+.project-grid{
+grid-template-columns:1fr;
+}
+.projects-page{
+padding:110px 30px;
+}
+.title{
+font-size:40px;
+}
+}
+
+@media(max-width:600px){
+.title{
+font-size:30px;
+}
+.card img{
+height:200px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="projects-page">
+
+<!-- TITLE -->
+<h1 class="title">My <span>Projects</span></h1>
+<p class="subtitle">Real world applications and UI designs I have built</p>
+
+<!-- ================= GRID ================= -->
+
+<div class="project-grid">
+
+<!-- PROJECT 1 -->
+<div class="card">
+
+<img src="/assets/desichat.webp">
+
+<div class="card-content">
+
+<h3>DesiChatRoom.com</h3>
+
+<p>
+Real-time chat application with modern UI, live messaging system, private rooms and responsive design.
+</p>
+
+<div class="tags">
+<span>Node.js</span>
+<span>MongoDB</span>
+<span>Socket.io</span>
+<span>HTML/CSS</span>
+</div>
+
+<div class="buttons">
+<a href="https://desichatroom.com/" class="btn btn-primary">Live Demo</a>
+<a href="#" class="btn btn-secondary">GitHub</a>
+</div>
+
+</div>
+
+</div>
+
+<!-- PROJECT 2 -->
+<div class="card">
+
+<img src="/assets/devstar.webp">
+
+<div class="card-content">
+
+<h3>DevStar+ Portfolio</h3>
+
+<p>
+Modern developer portfolio with glassmorphism UI, animations and responsive layout design.
+</p>
+
+<div class="tags">
+<span>HTML</span>
+<span>CSS</span>
+<span>JavaScript</span>
+</div>
+
+<div class="buttons">
+<a href="#" class="btn btn-primary">Live Demo</a>
+<a href="#" class="btn btn-secondary">Code</a>
+</div>
+
+</div>
+
+</div>
+
+<!-- PROJECT 3 -->
+<div class="card">
+
+<img src="ecommerce.png">
+
+<div class="card-content">
+
+<h3>E-Commerce UI</h3>
+
+<p>
+Modern shopping UI design with product cards, animations and responsive layout system.
+</p>
+
+<div class="tags">
+<span>UI Design</span>
+<span>Frontend</span>
+</div>
+
+<div class="buttons">
+<a href="#" class="btn btn-primary">Live Demo</a>
+<a href="#" class="btn btn-secondary">Code</a>
+</div>
+
+</div>
+
+</div>
+
+<!-- PROJECT 4 -->
+<div class="card">
+
+<img src="travel.png">
+
+<div class="card-content">
+
+<h3>Travel Website UI</h3>
+
+<p>
+Landing page design for travel platform with smooth layout and modern visuals.
+</p>
+
+<div class="tags">
+<span>HTML</span>
+<span>CSS</span>
+<span>Design</span>
+</div>
+
+<div class="buttons">
+<a href="#" class="btn btn-primary">Live Demo</a>
+<a href="#" class="btn btn-secondary">Code</a>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

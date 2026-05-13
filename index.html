@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jaideep Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+:root{
+--bg:#070716;
+--card:#0d0d22;
+--text:#fff;
+--gray:#b9b9c9;
+--pink:#ff4ecd;
+--blue:#5b9cff;
+--cyan:#00f0ff;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-track{
+background:#080818;
+}
+
+::-webkit-scrollbar-thumb{
+background:linear-gradient(var(--pink),var(--blue));
+border-radius:20px;
+}
+
+/* =========================
+   BACKGROUND GLOW
+========================= */
+
+body::before{
+content:'';
+position:fixed;
+top:-200px;
+left:-200px;
+width:500px;
+height:500px;
+background:#5b9cff22;
+filter:blur(120px);
+z-index:-1;
+}
+
+body::after{
+content:'';
+position:fixed;
+bottom:-200px;
+right:-200px;
+width:500px;
+height:500px;
+background:#ff4ecd22;
+filter:blur(120px);
+z-index:-1;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 60px;
+background:rgba(10,10,30,0.45);
+backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(255,255,255,0.08);
+z-index:1000;
+box-shadow:0 5px 30px rgba(91,156,255,0.08);
+}
+
+/* LOGO */
+
+.logo{
+font-size:26px;
+font-weight:700;
+background:linear-gradient(45deg,var(--pink),var(--blue));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* MENU */
+
+.menu{
+display:flex;
+gap:35px;
+}
+
+.menu a{
+text-decoration:none;
+color:#ccc;
+font-size:15px;
+position:relative;
+transition:0.3s;
+}
+
+.menu a::after{
+content:'';
+position:absolute;
+left:0;
+bottom:-6px;
+width:0%;
+height:2px;
+border-radius:20px;
+background:linear-gradient(45deg,var(--pink),var(--blue));
+transition:0.3s;
+}
+
+.menu a:hover{
+color:#fff;
+}
+
+.menu a:hover::after{
+width:100%;
+}
+
+/* BUTTON */
+
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:13px 26px;
+border-radius:50px;
+text-decoration:none;
+font-size:14px;
+font-weight:500;
+transition:0.35s;
+cursor:pointer;
+border:none;
+}
+
+.btn-primary{
+background:linear-gradient(45deg,var(--pink),var(--blue));
+color:#fff;
+box-shadow:0 0 20px #5b9cff55;
+}
+
+.btn-primary:hover{
+transform:translateY(-3px);
+box-shadow:0 0 25px #ff4ecd,0 0 40px #5b9cff;
+}
+
+.btn-secondary{
+background:
+linear-gradient(#0a0a1a,#0a0a1a) padding-box,
+linear-gradient(45deg,var(--pink),var(--blue)) border-box;
+border:1px solid transparent;
+color:#fff;
+}
+
+.btn-secondary:hover{
+box-shadow:0 0 20px #ff4ecd55;
+transform:translateY(-3px);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:140px 80px 120px;
+position:relative;
+background:url("/assets/hero.png") left center/cover no-repeat;
+overflow:hidden;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+inset:0;
+background:
+linear-gradient(to right,
+rgba(7,7,22,0.85) 20%,
+rgba(7,7,22,0.5) 50%,
+rgba(7,7,22,0.2) 100%);
+}
+
+/* LEFT */
+
+.hero-content{
+max-width:620px;
+z-index:2;
+}
+
+.hero-content small{
+display:inline-block;
+padding:8px 16px;
+border-radius:30px;
+margin-bottom:18px;
+background:#10102a;
+border:1px solid rgba(255,255,255,0.1);
+color:#d8d8e8;
+}
+
+.hero-content h1{
+font-size:65px;
+line-height:1.1;
+margin-bottom:15px;
+}
+
+.hero-content h1 span{
+background:linear-gradient(45deg,var(--pink),var(--blue));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero-content h2{
+font-size:22px;
+font-weight:400;
+color:#aaa;
+margin-bottom:20px;
+}
+
+.hero-content p{
+font-size:15px;
+line-height:1.8;
+color:#ccc;
+max-width:550px;
+}
+
+/* TAGS */
+
+.tags{
+margin-top:25px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.tag{
+padding:8px 16px;
+border-radius:30px;
+font-size:13px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(91,156,255,0.35);
+backdrop-filter:blur(8px);
+transition:0.3s;
+}
+
+.tag:hover{
+background:linear-gradient(45deg,var(--pink),var(--blue));
+transform:translateY(-2px);
+}
+
+/* HERO BUTTONS */
+
+.hero-buttons{
+display:flex;
+gap:15px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+
+/* HERO RIGHT */
+
+.hero-right{
+width:370px;
+z-index:2;
+}
+
+.glass-card{
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:blur(18px);
+padding:30px;
+border-radius:28px;
+box-shadow:0 0 40px rgba(0,0,0,0.3);
+}
+
+.glass-card h3{
+margin-bottom:20px;
+font-size:24px;
+}
+
+.glass-card p{
+color:#bbb;
+line-height:1.7;
+margin-bottom:18px;
+}
+
+.glass-card ul{
+list-style:none;
+}
+
+.glass-card ul li{
+margin-bottom:14px;
+color:#ddd;
+}
+
+/* STATS */
+
+.hero-stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:25px;
+}
+
+.stat-box{
+padding:15px;
+background:rgba(255,255,255,0.04);
+border-radius:18px;
+text-align:center;
+border:1px solid rgba(255,255,255,0.05);
+}
+
+.stat-box h4{
+font-size:22px;
+margin-bottom:4px;
+background:linear-gradient(45deg,var(--pink),var(--blue));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.stat-box p{
+font-size:12px;
+margin:0;
+}
+
+/* WAVE */
+
+.hero-wave{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+line-height:0;
+z-index:2;
+}
+
+.hero-wave svg{
+width:100%;
+height:120px;
+display:block;
+}
+
+.hero-wave path{
+fill:#070716;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+text-align:center;
+margin-bottom:60px;
+}
+
+.section-title h2{
+font-size:42px;
+margin-bottom:12px;
+}
+
+.section-title p{
+color:#aaa;
+font-size:15px;
+}
+
+/* =========================
+   FEATURED PROJECT
+========================= */
+
+.featured{
+position:relative;
+top:-40px;
+display:grid;
+grid-template-columns:1fr 1fr;
+align-items:center;
+gap:50px;
+padding:40px;
+border-radius:30px;
+background:linear-gradient(45deg,#ff4ecd10,#5b9cff10);
+overflow:hidden;
+margin:auto;
+max-width:1600px;
+min-height:520px;
+}
+
+/* BORDER */
+
+.featured::before{
+content:'';
+position:absolute;
+inset:0;
+padding:2px;
+border-radius:30px;
+background:linear-gradient(
+45deg,
+var(--pink),
+var(--blue),
+var(--cyan),
+#ff9a00
+);
+
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+pointer-events:none;
+}
+
+/* =========================
+   LEFT SIDE
+========================= */
+
+.featured-text{
+position:relative;
+z-index:2;
+padding-right:20px;
+}
+
+.featured-text h3{
+font-size:36px;
+margin-bottom:20px;
+line-height:1.3;
+}
+
+.featured-text p{
+color:#bbb;
+line-height:1.9;
+margin-bottom:22px;
+font-size:15px;
+}
+
+.featured-text ul{
+color:#ddd;
+line-height:2;
+margin-bottom:28px;
+padding-left:18px;
+}
+
+.featured-text li{
+margin-bottom:5px;
+}
+
+/* TECH TAGS */
+
+.tech-box{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-top:25px;
+}
+
+.tech-box span{
+padding:10px 18px;
+border-radius:40px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(91,156,255,0.35);
+font-size:13px;
+transition:0.3s;
+}
+
+.tech-box span:hover{
+background:linear-gradient(45deg,var(--pink),var(--blue));
+transform:translateY(-3px);
+}
+
+/* =========================
+   RIGHT IMAGE SIDE
+========================= */
+
+.project-images{
+position:relative;
+width:100%;
+height:100%;
+min-height:430px;
+border-radius:26px;
+overflow:hidden;
+z-index:2;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#0a0a1c;
+}
+
+/* MAIN IMAGE */
+
+.project-images img{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:fill;
+object-position:center;
+padding:15px;
+border-radius:26px;
+cursor:pointer;
+transition:0.4s ease;
+background:#0a0a1c;
+}
+
+/* HOVER */
+
+.project-images img:hover{
+transform:scale(1.02);
+}
+
+/* HIDE OTHER IMAGES */
+
+.project-images img:nth-child(2),
+.project-images img:nth-child(3){
+display:none;
+}
+
+/* =========================
+   PROJECT CARDS
+========================= */
+
+.card-container{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px;
+margin-top:20px;
+padding:0 80px;   
+}
+
+.card{
+position:relative;
+top:-40px;
+padding:20px;
+border-radius:24px;
+background:#0d0d22;
+overflow:hidden;
+transition:0.35s;
+cursor:pointer;
+z-index:1;
+width:100%;
+max-width:420px;  
+}
+
+.card::before{
+content:'';
+position:absolute;
+inset:0;
+padding:2px;
+border-radius:24px;
+background:linear-gradient(45deg,var(--pink),var(--blue),var(--cyan),#ff9a00);
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 35px #5b9cff33;
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:18px;
+margin-bottom:20px;
+}
+
+.card h3{
+margin-bottom:10px;
+font-size:24px;
+}
+
+.card p{
+font-size:14px;
+line-height:1.7;
+color:#aaa;
+margin-bottom:20px;
+}
+
+.card a,
+.card .btn,
+button{
+cursor:pointer;
+}
+
+@media(max-width:992px){
+.card-container{
+grid-template-columns:repeat(2,1fr);
+padding:0 40px;
+gap:25px;
+}
+}
+
+@media(max-width:600px){
+
+.card-container{
+grid-template-columns:1fr;
+padding:0 16px;
+gap:18px;
+
+/* ✅ IMPORTANT FIX */
+justify-items:center;
+}
+
+.card{
+ width:100%;
+max-width:420px;  
+}
+
+.card::before{
+z-index:0;
+pointer-events:none; 
+}
+
+.card img,
+.card h3,
+.card p,
+.card a,
+.card .btn{
+position:relative;
+z-index:2;
+}
+
+.card a{
+display:inline-block;
+pointer-events:auto;
+}
+}
+/* =========================
+   ABOUT
+========================= */
+
+.about-section{
+padding:20px 80px 90px;
+}
+
+.about-box{
+position:relative;
+overflow:hidden;
+border-radius:30px;
+display:flex;
+align-items:center;
+justify-content:flex-end;
+padding:25px 35px;
+background:#0d0d22;
+max-width:1600px;
+margin:auto;
+height:300px;
+min-height:300px;
+}
+
+/* IMAGE */
+
+.about-bg{
+position:absolute;
+left:0;
+top:0;
+width:100%;
+height:100%;
+object-fit:contain;
+object-position:left center;
+z-index:1;
+}
+
+/* DARK OVERLAY */
+
+.about-box::after{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(
+to right,
+rgba(7,7,22,0.05) 20%,
+rgba(7,7,22,0.75) 60%,
+rgba(7,7,22,0.96) 100%
+);
+z-index:2;
+}
+
+/* BORDER */
+
+.about-box::before{
+content:'';
+position:absolute;
+inset:0;
+padding:2px;
+border-radius:30px;
+background:linear-gradient(
+45deg,
+var(--pink),
+var(--blue),
+var(--cyan),
+#ff9a00
+);
+
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+
+z-index:3;
+}
+
+/* CONTENT */
+
+.about-content{
+position:relative;
+z-index:4;
+max-width:470px;
+}
+
+/* TITLE */
+
+.about-content h2{
+font-size:28px;
+line-height:1.3;
+margin-bottom:12px;
+
+background:linear-gradient(
+45deg,
+var(--pink),
+var(--blue)
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* TEXT */
+
+.about-content p{
+font-size:13px;
+line-height:1.7;
+color:#bbb;
+margin-bottom:16px;
+}
+
+/* TAGS */
+
+.about-content .tech-box{
+gap:8px;
+margin-top:0;
+margin-bottom:16px;
+}
+
+.about-content .tech-box span{
+padding:7px 13px;
+font-size:11px;
+}
+
+/* BUTTON */
+
+.about-content .btn{
+padding:10px 18px;
+font-size:12px;
+}
+
+/* =========================
+   SKILLS
+========================= */
+
+.skills-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:60px;
+}
+
+.skill-card{
+background:#0d0d22;
+padding:25px;
+border-radius:24px;
+position:relative;
+overflow:hidden;
+}
+
+.skill-card::before{
+content:'';
+position:absolute;
+inset:0;
+padding:1px;
+border-radius:24px;
+background:linear-gradient(45deg,var(--pink),var(--blue));
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+}
+
+.skill-card h3{
+margin-bottom:20px;
+font-size:22px;
+}
+
+.skill{
+margin-bottom:18px;
+}
+
+.skill-top{
+display:flex;
+justify-content:space-between;
+margin-bottom:8px;
+font-size:14px;
+}
+
+.bar{
+height:10px;
+background:#111;
+border-radius:20px;
+overflow:hidden;
+}
+
+.bar div{
+height:100%;
+border-radius:20px;
+background:linear-gradient(45deg,var(--pink),var(--blue));
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.stats-wrapper{
+display:grid;
+margin-top:-80px;
+grid-template-columns:repeat(3,1fr);
+gap:40px;
+padding:90px 80px;
+}
+
+.stats-timeline{
+border-left:2px solid #5b9cff;
+padding-left:20px;
+}
+
+.timeline-item{
+margin-bottom:35px;
+padding-left:20px;
+position:relative;
+}
+
+.timeline-item::before{
+content:'';
+position:absolute;
+left:-10px;
+top:5px;
+width:16px;
+height:16px;
+border-radius:50%;
+background:linear-gradient(45deg,var(--pink),var(--blue));
+box-shadow:0 0 12px #5b9cff;
+}
+
+.timeline-item h3{
+margin-bottom:8px;
+font-size:20px;
+}
+
+.timeline-item p{
+color:#aaa;
+font-size:14px;
+line-height:1.7;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact{
+padding:40px 80px 100px;
+}
+
+.contact-box{
+max-width:1100px;
+margin:auto;
+padding:50px;
+border-radius:30px;
+background:#0d0d22;
+position:relative;
+overflow:hidden;
+text-align:center;
+top:-60px;
+}
+
+.contact-box::before{
+content:'';
+position:absolute;
+inset:0;
+padding:2px;
+border-radius:30px;
+background:linear-gradient(45deg,var(--pink),var(--blue),var(--cyan));
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+}
+
+.contact-box h2{
+font-size:42px;
+margin-bottom:15px;
+position:relative;
+z-index:2;
+}
+
+.contact-box p{
+color:#aaa;
+line-height:1.8;
+margin-bottom:30px;
+position:relative;
+z-index:2;
+}
+
+.contact-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+position:relative;
+z-index:2;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+margin-top:-100px;
+padding:35px 20px;
+border-top:1px solid rgba(255,255,255,0.08);
+background:#050510;
+text-align:center;
+
+}
+
+footer h3{
+font-size:28px;
+margin-bottom:12px;
+background:linear-gradient(45deg,var(--pink),var(--blue));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+footer p{
+color:#999;
+font-size:14px;
+line-height:1.8;
+max-width:700px;
+margin:auto;
+}
+
+.footer-bottom{
+margin-top:25px;
+padding-top:20px;
+border-top:1px solid rgba(255,255,255,0.06);
+color:#777;
+font-size:13px;
+}
+
+/* =========================
+   POPUP
+========================= */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.92);
+display:flex;
+justify-content:center;
+align-items:center;
+visibility:hidden;
+opacity:0;
+transition:0.35s;
+z-index:99999;
+padding:20px;
+}
+
+.popup.active{
+visibility:visible;
+opacity:1;
+}
+
+.popup img{
+max-width:95%;
+max-height:95%;
+border-radius:20px;
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.menu-toggle{
+display:none;
+font-size:30px;
+cursor:pointer;
+}
+
+/* =========================================================
+   ALL RESPONSIVE AT LAST
+========================================================= */
+
+@media(max-width:1200px){
+
+.hero{
+padding:140px 50px 120px;
+}
+
+.projects,
+.about-section,
+.stats-wrapper,
+.contact{
+padding-left:50px;
+padding-right:50px;
+}
+
+}
+
+@media(max-width:992px){
+
+header{
+padding:18px 25px;
+}
+
+.menu{
+position:absolute;
+top:80px;
+left:0;
+width:100%;
+background:#090918;
+flex-direction:column;
+padding:25px;
+display:none;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.menu.active{
+display:flex;
+}
+
+.menu-toggle{
+display:block;
+}
+
+header .buttons{
+display:none;
+}
+
+.hero{
+flex-direction:column;
+text-align:center;
+gap:50px;
+padding:140px 30px 120px;
+}
+
+.hero-content{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.hero-content h1{
+font-size:50px;
+}
+
+.hero-right{
+width:100%;
+max-width:450px;
+}
+
+.featured{
+grid-template-columns:1fr;
+gap:35px;
+padding:30px;
+min-height:auto;
+justify-content:center;
+}
+
+.featured-text{
+text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding-right:0;
+}
+
+.featured-text ul{
+text-align:left;
+max-width:500px;
+}
+
+.project-images{
+width:100%;
+min-height:360px;
+max-width:100%;
+}
+
+.about-box{
+height:auto;
+min-height:auto;
+justify-content:center;
+padding:30px 25px;
+}
+
+.about-bg{
+object-position:center top;
+opacity:0.35;
+}
+
+.about-box::after{
+background:rgba(7,7,22,0.88);
+}
+
+.about-content{
+max-width:100%;
+text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.about-content h2{
+font-size:26px;
+}
+
+.about-content p{
+font-size:13px;
+max-width:650px;
+}
+
+.about-content .tech-box{
+justify-content:center;
+}
+
+.stats-wrapper{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:40px;
+}
+
+.section-title h2,
+.projects h2,
+.contact-box h2{
+font-size:34px;
+}
+
+.projects,
+.about-section,
+.stats-wrapper,
+.contact{
+padding-left:20px;
+padding-right:20px;
+}
+
+.featured{
+padding:24px;
+gap:25px;
+border-radius:26px;
+}
+
+.featured-text h3{
+font-size:28px;
+}
+
+.featured-text p{
+font-size:14px;
+line-height:1.8;
+}
+
+.featured-text ul{
+font-size:14px;
+line-height:1.9;
+}
+
+.project-images{
+min-height:300px;
+border-radius:22px;
+}
+
+.project-images img{
+padding:10px;
+border-radius:22px;
+}
+
+.tech-box{
+justify-content:center;
+}
+
+.tech-box span{
+font-size:12px;
+padding:9px 15px;
+}
+
+.about-section{
+padding:20px 20px 70px;
+}
+
+.about-box{
+padding:24px 18px;
+border-radius:24px;
+}
+
+.about-content h2{
+font-size:22px;
+line-height:1.4;
+margin-bottom:10px;
+}
+
+.about-content p{
+font-size:12px;
+line-height:1.7;
+margin-bottom:14px;
+}
+
+.about-content .tech-box{
+gap:7px;
+margin-bottom:14px;
+}
+
+.about-content .tech-box span{
+padding:6px 11px;
+font-size:10px;
+}
+
+.about-content .btn{
+padding:9px 16px;
+font-size:11px;
+}
+
+.contact-box{
+padding:40px 25px;
+}
+
+.hero-stats{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:500px){
+
+.hero{
+padding:120px 18px 110px;
+}
+
+.hero-content h1{
+font-size:33px;
+}
+
+.hero-content h2{
+font-size:18px;
+}
+
+.hero-content p{
+font-size:14px;
+}
+
+.section-title h2{
+font-size:28px;
+}
+
+.contact-box h2{
+font-size:28px;
+}
+
+.featured{
+padding:20px;
+gap:20px;
+border-radius:24px;
+}
+
+.featured-text h3{
+font-size:24px;
+}
+
+.featured-text p{
+font-size:13px;
+}
+
+.featured-text ul{
+font-size:13px;
+padding-left:15px;
+}
+
+.project-images{
+min-height:230px;
+border-radius:20px;
+}
+
+.project-images img{
+padding:8px;
+border-radius:20px;
+}
+
+.tech-box{
+gap:8px;
+}
+
+.tech-box span{
+font-size:11px;
+padding:8px 13px;
+}
+
+.card{
+padding:16px;
+}
+
+.card img{
+height:190px;
+}
+
+.about-box{
+padding:20px 14px;
+border-radius:20px;
+}
+
+.about-content h2{
+font-size:19px;
+}
+
+.about-content p{
+font-size:11px;
+line-height:1.6;
+}
+
+.about-content .tech-box span{
+padding:5px 10px;
+font-size:9px;
+}
+
+.about-content .btn{
+padding:8px 14px;
+font-size:10px;
+}
+
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+<div class="logo">Jaideep</div>
+
+<div class="menu" id="menu">
+
+<a href="#">Home</a>
+<a href="/menus/about.html">About</a>
+<a href="/menus/projects.html">Projects</a>
+<a href="/menus/skills.html">Skills</a>
+<a href="/menus/contact.html">Contact</a>
+
+</div>
+
+<div class="buttons">
+<a href="#" class="btn btn-secondary">Download Resume</a>
+</div>
+
+<div class="menu-toggle" id="menuToggle">
+☰
+</div>
+
+</header>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<small>🔥 Full Stack Developer & UI Designer</small>
+
+<h1>
+Hi, I'm <span>Jaideep Meshram</span>
+</h1>
+
+<h2>Building Modern Full Stack Experiences</h2>
+
+<p>
+I create powerful and modern web applications with beautiful UI, smooth animations, responsive layouts and scalable backend systems. Focused on performance, clean code and user experience.
+</p>
+
+<div class="tags">
+
+<span class="tag">HTML</span>
+<span class="tag">CSS</span>
+<span class="tag">JavaScript</span>
+<span class="tag">React JS</span>
+<span class="tag">Node JS</span>
+<span class="tag">MongoDB</span>
+
+</div>
+
+<div class="hero-buttons">
+
+<a href="#" class="btn btn-primary">View My Work</a>
+
+<a href="#" class="btn btn-secondary">Download CV</a>
+
+</div>
+
+</div>
+
+<div class="hero-right">
+
+<div class="glass-card">
+
+<h3>🚀 What I Do</h3>
+
+<p>
+I design and develop modern web applications with beautiful interfaces and powerful backend architecture.
+</p>
+
+<ul>
+
+<li>✔ Responsive Websites</li>
+<li>✔ Full Stack Development</li>
+<li>✔ Real-Time Applications</li>
+<li>✔ UI / UX Design</li>
+<li>✔ REST API Integration</li>
+<li>✔ Performance Optimization</li>
+
+</ul>
+
+<div class="hero-stats">
+
+<div class="stat-box">
+<h4>10+</h4>
+<p>Projects</p>
+</div>
+
+<div class="stat-box">
+<h4>100%</h4>
+<p>Responsive</p>
+</div>
+
+<div class="stat-box">
+<h4>24/7</h4>
+<p>Learning</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</section>
+
+<!-- =========================
+     PROJECTS
+========================= -->
+
+<section class="projects">
+
+<div class="section-title">
+
+<h2>Featured Project</h2>
+
+<p>Modern full stack applications built with performance & design in mind.</p>
+
+</div>
+
+<div class="featured">
+
+<div class="featured-text">
+
+<h3>🔥 DesiChatRoom – Real Time Chat App</h3>
+
+<p>
+A complete real-time chatting platform with modern UI, live messaging system, admin control panel and customizable user experience.
+</p>
+
+<ul>
+
+<li>💬 Live Real-Time Messaging</li>
+<li>📩 Private Messaging System</li>
+<li>🔔 Live Notifications</li>
+<li>🎨 Username Customization</li>
+<li>⚡ Fast & Smooth UI</li>
+<li>🌐 Multi Chat Room Support</li>
+
+</ul>
+
+<a href="https://desichatroom.com/" class="btn btn-primary">View Live Website</a>
+
+<div class="tech-box">
+
+<span>HTML</span>
+<span>CSS</span>
+<span>JavaScript</span>
+<span>Node.js</span>
+<span>MongoDB</span>
+
+</div>
+
+</div>
+
+<div class="project-images">
+
+<img src="/assets/desichatroom.png" onclick="openPopup(this.src)">
+<img src="desi-chat2.png" onclick="openPopup(this.src)">
+<img src="desi-full.png" onclick="openPopup(this.src)">
+
+</div>
+
+</div>
+
+<!-- PROJECT CARDS -->
+
+<div class="section-title" style="margin-top:20px;">
+
+<h2>My Portfolio Designs</h2>
+
+<p>Creative responsive UI designs and modern website interfaces.</p>
+
+</div>
+
+<div class="card-container">
+
+<div class="card">
+
+<img src="/assets/desichat.webp">
+
+<h3>DesiChatRoom</h3>
+
+<p>
+Modern real-time chat application with private messaging,emoji,notification, rooms and responsive interface.
+</p>
+
+<a href="https://desichatroom.com/" class="btn btn-primary">Live Demo</a>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="/assets/devstar.webp">
+
+<h3>DevStar+ Movie Portfolio</h3>
+
+<p>
+Cinematic OTT-style portfolio inspired by Hotstar/Netflix.  
+Modern UI with smooth animations and movie-style project showcase.
+</p>
+
+<a href="#" class="btn btn-primary">Live Demo</a>
+
+</div>
+
+<div class="card">
+
+<img src="/assets/desi-full.png">
+
+<h3>Travel Website</h3>
+
+<p>
+Interactive travel landing page design with smooth modern layout and visuals.
+</p>
+
+<a href="#" class="btn btn-primary">Live Demo</a>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="desi-full.png">
+
+<h3>Movie Platform</h3>
+
+<p>
+Cinematic streaming UI inspired by Netflix with premium glassmorphism interface.
+</p>
+
+<a href="#" class="btn btn-primary">Live Demo</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="about-section">
+
+<div class="about-box">
+
+<img src="/assets/monty-b2.webp" class="about-bg">
+
+<div class="about-content">
+
+<h2>
+Crafting Digital Experiences That Make An Impact
+</h2>
+
+<p>
+I’m Jaideep Meshram, a passionate Full Stack Developer focused on building fast, responsive and modern web experiences. I love creating premium UI designs and scalable backend systems that provide smooth user experiences across all devices.
+</p>
+
+<div class="tech-box">
+
+<span>HTML</span>
+<span>CSS</span>
+<span>JavaScript</span>
+<span>React JS</span>
+<span>Node JS</span>
+<span>MongoDB</span>
+
+</div>
+
+<a href="#" class="btn btn-primary">
+Know More About Me
+</a>
+
+</div>
+
+</div>
+
+<!-- SKILLS -->
+
+<div class="section-title" style="margin-top:30px;">
+
+<h2>Skills & Technologies</h2>
+
+<p>Technologies and tools I use for building modern applications.</p>
+
+</div>
+
+<div class="skills-grid">
+
+<div class="skill-card">
+
+<h3>Frontend</h3>
+
+<div class="skill">
+
+<div class="skill-top">
+<span>HTML</span>
+<span>95%</span>
+</div>
+
+<div class="bar">
+<div style="width:95%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-top">
+<span>CSS</span>
+<span>92%</span>
+</div>
+
+<div class="bar">
+<div style="width:92%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-top">
+<span>JavaScript</span>
+<span>85%</span>
+</div>
+
+<div class="bar">
+<div style="width:85%"></div>
+</div>
+
+</div>
+
+</div>
+
+<div class="skill-card">
+
+<h3>Backend</h3>
+
+<div class="skill">
+
+<div class="skill-top">
+<span>Node JS</span>
+<span>80%</span>
+</div>
+
+<div class="bar">
+<div style="width:80%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-top">
+<span>Express JS</span>
+<span>78%</span>
+</div>
+
+<div class="bar">
+<div style="width:78%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-top">
+<span>MongoDB</span>
+<span>75%</span>
+</div>
+
+<div class="bar">
+<div style="width:75%"></div>
+</div>
+
+</div>
+
+</div>
+
+<div class="skill-card">
+
+<h3>Tools</h3>
+
+<div class="skill">
+
+<div class="skill-top">
+<span>GitHub</span>
+<span>80%</span>
+</div>
+
+<div class="bar">
+<div style="width:80%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-top">
+<span>VS Code</span>
+<span>95%</span>
+</div>
+
+<div class="bar">
+<div style="width:95%"></div>
+</div>
+
+</div>
+
+<div class="skill">
+
+<div class="skill-top">
+<span>UI/UX</span>
+<span>85%</span>
+</div>
+
+<div class="bar">
+<div style="width:85%"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     TIMELINE
+========================= -->
+
+<section class="stats-wrapper">
+
+<div class="stats-timeline">
+
+<div class="timeline-item">
+<h3>💻 10+ Projects</h3>
+<p>Built modern web applications and portfolio websites.</p>
+</div>
+
+<div class="timeline-item">
+<h3>📱 Responsive Design</h3>
+<p>Optimized layouts for all devices and screen sizes.</p>
+</div>
+
+<div class="timeline-item">
+<h3>⚡ Performance</h3>
+<p>Fast loading websites with clean optimized code.</p>
+</div>
+
+</div>
+
+<div class="stats-timeline">
+
+<div class="timeline-item">
+<h3>🌐 Full Stack</h3>
+<p>Frontend and backend complete development solutions.</p>
+</div>
+
+<div class="timeline-item">
+<h3>🔗 API Integration</h3>
+<p>Connected applications with modern backend services.</p>
+</div>
+
+<div class="timeline-item">
+<h3>🎨 UI / UX</h3>
+<p>Modern premium user interfaces and interactions.</p>
+</div>
+
+</div>
+
+<div class="stats-timeline">
+
+<div class="timeline-item">
+<h3>🚀 Real Time Apps</h3>
+<p>Built live chat applications and notification systems.</p>
+</div>
+
+<div class="timeline-item">
+<h3>🧠 Problem Solving</h3>
+<p>Focused on debugging and improving experiences.</p>
+</div>
+
+<div class="timeline-item">
+<h3>🔥 Passionate Developer</h3>
+<p>Always learning new technologies and improving skills.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="contact">
+
+<div class="contact-box">
+
+<h2>Let’s Build Something Amazing</h2>
+
+<p>
+Need a modern website, portfolio or full stack web application?  
+Let’s work together and create something awesome.
+</p>
+
+<div class="contact-buttons">
+
+<a href="#" class="btn btn-primary">Hire Me</a>
+
+<a href="#" class="btn btn-secondary">Contact Me</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<h3>Jaideep Meshram</h3>
+
+<p>
+Full Stack Developer passionate about creating modern UI, responsive websites and scalable web applications with smooth user experiences.
+</p>
+
+<div class="footer-bottom">
+© 2026 Jaideep Portfolio • All Rights Reserved
+</div>
+
+</footer>
+
+<!-- =========================
+     IMAGE POPUP
+========================= -->
+
+<div class="popup" id="popup" onclick="closePopup()">
+
+<img id="popupImg">
+
+</div>
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+/* =========================
+   IMAGE POPUP
+========================= */
+
+function openPopup(src){
+
+document.getElementById("popupImg").src = src;
+
+document.getElementById("popup")
+.classList.add("active");
+
+}
+
+function closePopup(){
+
+document.getElementById("popup")
+.classList.remove("active");
+
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuToggle = document.getElementById("menuToggle");
+
+const menu = document.getElementById("menu");
+
+menuToggle.addEventListener("click",()=>{
+
+menu.classList.toggle("active");
+
+});
+
+/* =========================
+   CLOSE MENU AFTER CLICK
+========================= */
+
+document.querySelectorAll(".menu a")
+.forEach(link=>{
+
+link.addEventListener("click",()=>{
+
+menu.classList.remove("active");
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
