@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ================= SLIDER ================= */
+
+h2 {
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+  margin-left: 50px;
+}
+
+.slider-wrapper { 
+  position: relative; 
+  overflow: visible; 
+  z-index: 1;
+  margin-bottom: 40px;
+}
+
+.slider-wrapper:hover {
+  z-index: 999;
+}
+
+
+/* 🔥 GRID SYSTEM */
+.slider {
+  display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+  gap: 20px;
+  padding: 70px 30px;
+  padding-bottom: 80px; 
+  column-gap: 20px;  
+  row-gap: 60px; 
+}
+
+/* SCROLL REMOVE */
+.slider::-webkit-scrollbar { display: none; }
+
+/* CARD FIX */
+.card-item {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  z-index: 2;
+}
+
+/* ================= CARD ================= */
+
+.card-item {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  z-index: 2;
+}
+
+.card-inner {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  background: #111;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index:2;
+}
+
+/* IMAGE */
+
+.img-box {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+/* DETAILS */
+
+.card-item .title {
+  font-size: 14px !important;
+  font-weight: bold;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+
+.details {
+  padding: 12px;
+  display: none;
+  background: linear-gradient(to bottom, rgba(105,100,105,0.2), rgba(14, 14, 15, 0.9), rgba(10,15,25,1));
+}
+
+.details .meta{
+  margin-top: -10px; /* 🔥 upar kheech lega */
+}
+
+.card-item .details .title{
+  display: none;
+}
+
+/* HOVER */
+
+.card-item:hover {
+  z-index: 999;
+}
+
+.card-item:hover .card-inner {
+  transform: scale(1.22) translateY(-20px);
+  position: absolute;
+  width: 260px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+.card-item:hover .img-box {
+  height: 140px;
+}
+
+.card-item:hover .details {
+  display: block;
+}
+
+
+.watch-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 6px;
+  width: 100%;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+   flex:1; 
+}
+
+.actions-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:6px 0;
+}
+
+
+/* + button same height */
+.icon-btn{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,0.4);
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  cursor:pointer;
+  margin-bottom:20px;
+}
+
+
+.card-item:first-child:hover .card-inner{
+transform: scale(1.22) translateY(-20px) translateX(30px);
+}
+
+
+/* ================= VIDEO PREVIEW ================= */
+
+.preview-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: 0.3s;
+  pointer-events: none;
+}
+.card-item.show-video .preview-video { opacity: 1; }
+
+
+.mute-btn{
+position:absolute;
+bottom:10px;
+right:10px;
+
+width:42px;
+height:42px;
+border-radius:50%;
+border:1px solid rgba(255,255,255,.35);
+
+background:rgba(20,20,20,.65);
+backdrop-filter:blur(5px);
+
+display:none;
+align-items:center;
+justify-content:center;
+
+cursor:pointer;
+}
+
+.card-item.show-video .mute-btn{
+display:flex;
+}
+
+
+/* speaker body */
+.speaker-icon{
+position:relative;
+width:18px;
+height:14px;
+display:block;
+}
+
+.speaker-icon:before{
+content:"";
+position:absolute;
+left:0;
+top:3px;
+
+width:8px;
+height:8px;
+background:white;
+clip-path: polygon(0 30%,55% 30%,100% 0,100% 100%,55% 70%,0 70%);
+}
+
+
+/* sound waves (dandi) */
+.speaker-icon:after{
+content:"";
+position:absolute;
+left:10px;
+top:1px;
+
+width:6px;
+height:10px;
+border-right:2px solid white;
+border-radius:50%;
+}
+
+
+/* muted slash */
+.mute-btn.muted .speaker-icon{
+transform:rotate(0);
+}
+
+.mute-btn.muted .speaker-icon::after{
+display:none;
+}
+
+.mute-btn.muted::after{
+content:"";
+position:absolute;
+width:18px;
+height:2px;
+background:#fff;
+transform:rotate(-45deg);
+}
+
+.card-item.show-video .mute-btn { display: flex; }
+
+
+iframe.preview-video{
+border:none;
+}
+
+
+
+/* ================= MODAL POPUP ================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.61);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.modal.show { 
+    display: flex;
+ }
+
+.modal-box {
+  width: 850px;
+  max-width: 95%;
+  background: #141414;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+}
+
+.modal-video-wrap {
+  width: 100%;
+  height: 460px;
+}
+
+.modal-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: red;
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.modal-details {
+  padding: 20px 30px 30px;
+  margin-top: -120px; /* 🔥 overlap effect */
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+/* TITLE */
+.modal-details h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* TAGS */
+.modal-tags {
+  margin-bottom: 10px;
+}
+
+.modal-tags span {
+  font-size: 12px;
+  background: #2a2a2a;
+  padding: 5px 8px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+
+/* DESC */
+.modal-details p {
+  font-size: 14px;
+  color: #ccc;
+  margin: 12px 0 18px;
+  line-height: 1.5;
+}
+
+/* BUTTON (sirf color change) */
+.watch-now {
+  background: #e50914; /* 🔥 Netflix red */
+  color: #fff;
+  padding: 10px 22px;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal .modal-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.modal .modal-tags span {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+  color: #ccc;
+}
+
+.modal .modal-tags span.highlight {
+  background: #2a2a2a;
+  color: #fff;
+  font-weight: 600;
+}
+
+.modal-details h1,
+.modal-content h1 {   /* dono cover ho jaye */
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+
+  /* 🔥 Hotstar style depth */
+  text-shadow: 
+    0 2px 10px rgba(0,0,0,0.8),
+    0 0 20px rgba(0,0,0,0.6);
+
+  /* thoda gradient feel */
+  background: linear-gradient(to bottom, #ffffff, #cfcfcf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* thoda upar overlap feel aur strong */
+.modal-content {
+  margin-top: -130px;
+  position: relative;
+  z-index: 2;
+  padding: 35px 40px 45px;
+}
+
+
+
+
+/* mobile pe control */
+@media (max-width: 768px){
+  .modal-content h1 {
+    font-size: 32px;
+  }
+}
+
+
+/* ================= MODAL SOUND BUTTON FIX ================= */
+
+#modalSoundBtn{
+  position: absolute;
+  bottom: 120px;   /* 👈 video ke upar visible hoga */
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(20,20,20,0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 99999; /* 🔥 MUST HIGH */
+}
+
+/* icon center fix */
+#modalSoundBtn .speaker-icon{
+  width: 18px;
+  height: 14px;
+  display: block;
+  position: relative;
+}
+
+/* muted state */
+#modalSoundBtn.muted{
+  opacity: 0.7;
+}
+
+#modalSoundBtn.muted::after{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:2px;
+  background:#fff;
+  transform:rotate(-45deg);
+}
+
+
+
+
+/* ================= RESPONSIVE CARD SYSTEM ================= */
+
+/* DEFAULT (LAPTOP / DESKTOP LARGE) */
+
+/* LARGE SCREEN */
+@media (min-width: 1400px) {
+  .card-item {
+    min-width: 260px;
+    height: 340px;
+  }
+}
+
+/* LAPTOP */
+@media (max-width: 1200px) {
+  .card-item {
+    min-width: 220px;
+    height: 300px;
+  }
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+  .card-item {
+    min-width: 200px;
+    height: 280px;
+  }
+
+  .slider {
+    gap: 20px;
+  }
+}
+
+/* SMALL TABLET / BIG MOBILE */
+@media (max-width: 768px) {
+  .card-item {
+    min-width: 160px;
+    height: 240px;
+  }
+
+  .slider {
+    gap: 12px;
+    padding: 70px 10px;
+  }
+
+  /* hover zoom thoda reduce */
+  .card-item:hover .card-inner {
+    transform: scale(1.1) translateY(-10px);
+  }
+}
+
+/* MOBILE (3 CARDS FIX) */
+@media (max-width: 480px) {
+
+  
+
+  /* 🔥 EXACT 3 CARDS FIX */
+  .slider {
+    gap: 6px;
+    padding: 60px 6px;
+  
+  }
+
+ 
+
+
+  .img-box {
+    height: 140px;
+  }
+
+  /* remove hover zoom completely on mobile */
+  .card-item:hover .card-inner {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .details {
+    display: none !important;
+  }
+
+  .card-arrow {
+    font-size: 20px;
+    padding: 0px;
+    margin-top: -20px;
+  }
+
+}
+
+
+
+/* ================= RESPONSIVE SLIDER HEADER ================= */
+
+/* Desktop */
+.slider-header h2 {
+  font-size: 18px;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .slider-header h2 {
+    font-size: 22px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .slider-header h2 {
+    font-size: 16px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  body {
+    padding: 0 10px;
+  }
+}
+
+
+
+/* ================= MOBILE ================= */
+@media (max-width: 480px) {
+  .slider-wrapper .card-item::before {
+    font-size: 60px;
+    left: -4px;
+    bottom: -18px;
+    opacity: 0.7; /* thoda soft look */
+  }
+
+ 
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+  .slider {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+  }
+
+  .card-item {
+    height: 260px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+
+  .slider {
+    grid-template-columns: repeat(2, 1fr); /* 🔥 FIXED 3 CARDS */
+    gap: 8px;
+    padding: 20px 8px;
+
+    overflow: hidden; /* ❌ auto hata, warna tootega */
+  }
+
+  .card-item {
+    height: 150px;
+  }
+
+  .img-box {
+    height: 150px;
+  }
+
+
+.slider-header h2 {
+   margin-left:10px;
+   margin-bottom:30px;
+}
+
+}
+
+/* ================= MOBILE MODAL FIX ================= */
+
+@media (max-width: 768px){
+
+  .modal{
+    align-items: flex-start;   /* 🔥 top se start */
+    overflow-y: auto;          /* scroll enable */
+  }
+
+  .modal-box{
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;          /* full screen feel */
+    margin: 0;
+  }
+
+  .modal-video-wrap{
+    height: 220px;   /* 🔥 video chhota */
+  }
+
+  .modal-content{
+    margin-top: -60px;   /* overlap halka */
+    padding: 20px;
+  }
+
+  .modal-content h1{
+    font-size: 22px;   /* title perfect */
+    line-height: 1.2;
+  }
+
+  .modal-tags{
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .modal-details p,
+  #mDesc{
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .watch-now{
+    width: 100%;        /* 🔥 full width button */
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  #modalSoundBtn{
+    bottom: 80px;   /* adjust position */
+    right: 15px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .close-btn{
+    top: 10px;
+    right: 10px;
+    padding: 8px;
+  }
+
+}
+</style>
+
+</head>
+
+<body>
+
+ <!-- ================= SLIDER 6 ================= -->
+
+<div class="slider-header">
+  <h2>Survival Movies</h2>
+ 
+</div>
+
+<div class="slider-wrapper">
+ 
+
+  <div class="slider">
+
+    <!-- CARD 1 -->
+    <div class="card-item" data-preview="3.mp4" data-full="3.mp4">
+      <div class="card-inner">
+        <div class="img-box">
+          <img src="/assets/slider-6/s6c1.webp">
+
+           <video class="preview-video" loop muted playsinline>
+            <source src="3.mp4" type="video/mp4">
+          </video>
+
+          <button class="mute-btn"><span class="speaker-icon"></span></button>
+        </div>
+        <div class="details">
+          <div class="title">Life of Pi</div>
+          <div class="actions-row">
+            <button class="watch-btn">▶ Watch Now</button>
+            <button class="icon-btn add">+</button>
+          </div>
+          <div class="meta modal-tags">
+            <span>2012</span><span class="highlight">U/A 13+</span><span>2h 07m</span><span>Hindi</span>
+          </div>
+          <div class="desc">A boy survives a shipwreck and shares a lifeboat with a Bengal tiger.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="card-item" data-preview="3.mp4" data-full="3.mp4">
+      <div class="card-inner">
+        <div class="img-box">
+          <img src="/assets/slider-6/s6c2.webp">
+
+           <video class="preview-video" loop muted playsinline>
+            <source src="3.mp4" type="video/mp4">
+          </video>
+
+          <button class="mute-btn"><span class="speaker-icon"></span></button>
+        </div>
+        <div class="details">
+          <div class="title">Fall</div>
+          <div class="actions-row">
+            <button class="watch-btn">▶ Watch Now</button>
+            <button class="icon-btn add">+</button>
+          </div>
+          <div class="meta modal-tags">
+            <span>2022</span><span class="highlight">U/A 13+</span><span>1h 47m</span><span>Hindi</span>
+          </div>
+          <div class="desc">Two girls get stuck on a 2000 ft tower with no way down.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="card-item" data-preview="3.mp4" data-full="3.mp4">
+      <div class="card-inner">
+        <div class="img-box">
+          <img src="/assets/slider-6/s6c3.webp">
+
+          <video class="preview-video" loop muted playsinline>
+            <source src="3.mp4" type="video/mp4">
+          </video>
+
+          <button class="mute-btn"><span class="speaker-icon"></span></button>
+        </div>
+        <div class="details">
+          <div class="title">Tunnel</div>
+          <div class="actions-row">
+            <button class="watch-btn">▶ Watch Now</button>
+            <button class="icon-btn add">+</button>
+          </div>
+          <div class="meta modal-tags">
+            <span>2016</span><span class="highlight">U/A 13+</span><span>2h 06m</span><span>Hindi</span>
+          </div>
+          <div class="desc">A man gets trapped inside a collapsed tunnel.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="card-item" data-preview="3.mp4" data-full="3.mp4" >
+      <div class="card-inner">
+        <div class="img-box">
+          <img src="/assets/slider-6/s6c4.webp">
+
+           <video class="preview-video" loop muted playsinline>
+            <source src="3.mp4" type="video/mp4">
+          </video>
+
+          <button class="mute-btn"><span class="speaker-icon"></span></button>
+        </div>
+        <div class="details">
+          <div class="title">The Pool</div>
+          <div class="actions-row">
+            <button class="watch-btn">▶ Watch Now</button>
+            <button class="icon-btn add">+</button>
+          </div>
+          <div class="meta modal-tags">
+            <span>2018</span><span class="highlight">U/A 13+</span><span>1h 31m</span><span>Hindi</span>
+          </div>
+          <div class="desc">A couple is trapped in a drained pool with a predator.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="card-item" data-preview="3.mp4" data-full="3.mp4">
+      <div class="card-inner">
+        <div class="img-box">
+          <img src="/assets/slider-6/s6c5.webp">
+
+           <video class="preview-video" loop muted playsinline>
+            <source src="3.mp4" type="video/mp4">
+          </video>
+
+          <button class="mute-btn"><span class="speaker-icon"></span></button>
+        </div>
+        <div class="details">
+          <div class="title">Crawl</div>
+          <div class="actions-row">
+            <button class="watch-btn">▶ Watch Now</button>
+            <button class="icon-btn add">+</button>
+          </div>
+          <div class="meta modal-tags">
+            <span>2019</span><span class="highlight">U/A 13+</span><span>1h 27m</span><span>Hindi</span>
+          </div>
+          <div class="desc">A woman fights giant alligators during a flood.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="card-item" data-preview="3.mp4" data-full="3.mp4">
+      <div class="card-inner">
+        <div class="img-box">
+          <img src="/assets/slider-6/s6c6.webp">
+
+         <video class="preview-video" loop muted playsinline>
+            <source src="3.mp4" type="video/mp4">
+          </video>
+
+          <button class="mute-btn"><span class="speaker-icon"></span></button>
+        </div>
+        <div class="details">
+          <div class="title">The Wave</div>
+          <div class="actions-row">
+            <button class="watch-btn">▶ Watch Now</button>
+            <button class="icon-btn add">+</button>
+          </div>
+          <div class="meta modal-tags">
+            <span>2015</span><span class="highlight">U/A 13+</span><span>1h 45m</span><span>Hindi</span>
+          </div>
+          <div class="desc">A tsunami destroys a Norwegian town.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="card-item" preview="3.mp4" data-full="3.mp4">
+      <div class="card-inner">
+        <div class="img-box">
+          <img src="/assets/slider-6/s6c7.webp">
+
+             <video class="preview-video" loop muted playsinline>
+            <source src="3.mp4" type="video/mp4">
+          </video>
+
+          <button class="mute-btn"><span class="speaker-icon"></span></button>
+        </div>
+        <div class="details">
+          <div class="title">Escape Room</div>
+          <div class="actions-row">
+            <button class="watch-btn">▶ Watch Now</button>
+            <button class="icon-btn add">+</button>
+          </div>
+          <div class="meta modal-tags">
+            <span>2019</span><span class="highlight">U/A 13+</span><span>1h 39m</span><span>Hindi</span>
+          </div>
+          <div class="desc">Six strangers trapped in deadly puzzle rooms.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="card-item" data-preview="3.mp4" data-full="3.mp4">
+      <div class="card-inner">
+        <div class="img-box">
+          <img src="/assets/slider-6/s6c8.webp">
+
+           <video class="preview-video" loop muted playsinline>
+            <source src="3.mp4" type="video/mp4">
+          </video>
+
+          <button class="mute-btn"><span class="speaker-icon"></span></button>
+        </div>
+        <div class="details">
+          <div class="title">The Requin</div>
+          <div class="actions-row">
+            <button class="watch-btn">▶ Watch Now</button>
+            <button class="icon-btn add">+</button>
+          </div>
+          <div class="meta modal-tags">
+            <span>2022</span><span class="highlight">U/A 13+</span><span>1h 29m</span><span>Hindi</span>
+          </div>
+          <div class="desc">A couple stranded in sea surrounded by sharks.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  
+</div>
+
+<!-- ================= FINAL MODAL ================= -->
+<div id="modal" class="modal">
+  <div class="modal-box">
+
+    <div class="modal-video-wrap">
+
+      <!-- 🔥 ONLY MP4 -->
+      <video id="modalVideo" autoplay playsinline></video>
+
+      <!-- 🔊 CUSTOM SOUND -->
+      <button id="modalSoundBtn" class="mute-btn muted">
+        <span class="speaker-icon"></span>
+      </button>
+
+    
+
+      <button class="close-btn">✖</button>
+
+    </div>
+
+    <div class="modal-content">
+
+      <!-- TITLE -->
+      <h1 id="mTitle"></h1>
+
+      <!-- 🔥 META (JS yaha inject karega) -->
+      <div class="meta" id="mMeta"></div>
+
+      <!-- DESC -->
+      <p id="mDesc"></p>
+
+      <!-- WATCH -->
+      <button class="watch-now">▶ Watch Now</button>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Company -->
+    <div class="footer-col">
+      <h3>Company</h3>
+       <a href="#">About Us</a>
+  <a href="#">Careers</a>
+  <a href="#">Terms of Use</a>
+  <a href="#">Privacy Policy</a>
+  
+    </div>
+
+    <!-- View Website -->
+    <div class="footer-col">
+      <h3>View Website in</h3>
+      <a href="#">English</a>
+    </div>
+
+    <!-- Need Help -->
+    <div class="footer-col">
+      <h3>Need Help?</h3>
+<a href="#">Help Center</a>
+  <a href="#">How to Use</a>
+  <a href="#">Common Questions</a>
+  <a href="#">Report a Problem</a>
+  <a href="#">Contact Us</a>
+    </div>
+
+    <!-- About Project -->
+    <div class="footer-col">
+      <h3>About Project</h3>
+      <p>This Hotstar clone is built for learning and portfolio purposes.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Jaidip. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+
+
+
+
+/* ================= MAIN ================= */
+
+let currentMovie = "";
+
+function initSliders(){
+
+let modal = document.getElementById('modal');
+let modalVideo = document.getElementById('modalVideo');
+let modalSoundBtn = document.getElementById('modalSoundBtn');
+
+let isMuted = true;
+
+
+/* ================= MODAL SOUND ================= */
+
+if(modalSoundBtn){
+
+modalSoundBtn.addEventListener("click",(e)=>{
+
+e.stopPropagation();
+
+if(modalVideo.muted){
+
+modalVideo.muted = false;
+modalVideo.volume = 1;
+modalSoundBtn.classList.remove("muted");
+isMuted = false;
+
+}else{
+
+modalVideo.muted = true;
+modalSoundBtn.classList.add("muted");
+isMuted = true;
+
+}
+
+});
+
+}
+
+
+/* ================= SLIDERS ================= */
+
+document.querySelectorAll('.slider-wrapper').forEach(wrapper=>{
+
+let slider = wrapper.querySelector('.slider');
+
+let rightBtn = wrapper.querySelector('.card-right');
+let leftBtn = wrapper.querySelector('.card-left');
+
+
+
+/* ================= CARDS ================= */
+
+wrapper.querySelectorAll('.card-item').forEach(card=>{
+
+const video = card.querySelector('video.preview-video');
+const btn = card.querySelector('.mute-btn');
+
+let timer;
+
+
+/* 🔥 HOVER PREVIEW (FIXED SMOOTH) */
+card.addEventListener('mouseenter',()=>{
+
+timer = setTimeout(()=>{
+
+card.classList.add('show-video');
+
+if(video){
+video.currentTime = 0;
+video.muted = true;
+video.play().catch(()=>{});
+}
+
+},500);
+
+});
+
+
+card.addEventListener('mouseleave',()=>{
+
+clearTimeout(timer);
+
+card.classList.remove('show-video');
+
+if(video){
+video.pause();
+video.currentTime = 0;
+video.muted = true;
+}
+
+if(btn){
+btn.classList.add("muted");
+}
+
+});
+
+
+/* 🔊 CARD SOUND BUTTON */
+if(btn){
+
+btn.addEventListener('click',(e)=>{
+
+e.stopPropagation(); // 🔥 modal open fix
+
+if(video){
+
+if(video.muted){
+video.muted = false;
+video.volume = 1;
+btn.classList.remove("muted");
+}else{
+video.muted = true;
+btn.classList.add("muted");
+}
+
+}
+
+});
+
+}
+
+
+
+
+/* ================= MODAL CLICK ================= */
+
+card.addEventListener('click',()=>{
+
+let previewSrc = card.dataset.preview;
+currentMovie = card.dataset.full || previewSrc;
+
+let title = card.querySelector('.title')?.innerText || 'Movie';
+let meta = card.querySelector('.meta')?.innerHTML || '';
+let desc = card.querySelector('.desc')?.innerText || '';
+
+/* TITLE */
+document.getElementById('mTitle').innerText = title;
+
+/* 🔥 META FIX (IMPORTANT) */
+let metaBox = document.getElementById('mMeta');
+metaBox.innerHTML = "";
+metaBox.className = "meta modal-tags";  
+metaBox.innerHTML = meta;
+
+/* DESC */
+document.getElementById('mDesc').innerText = desc;
+
+/* OPEN */
+modal.classList.add('show');
+
+/* VIDEO LOAD */
+modalVideo.style.display = "block";
+modalVideo.src = previewSrc;
+modalVideo.currentTime = 0;
+modalVideo.muted = false;
+modalVideo.play().catch(()=>{});
+
+/* sound state */
+isMuted = false;
+modalSoundBtn.classList.remove("muted");
+
+
+});
+
+});
+
+});
+
+
+/* ================= CLOSE MODAL ================= */
+
+document.querySelector('.close-btn')
+?.addEventListener('click', closeModal);
+
+modal?.addEventListener('click',(e)=>{
+if(e.target === modal){
+closeModal();
+}
+});
+
+function closeModal(){
+
+modal.classList.remove('show');
+
+modalVideo.pause();
+modalVideo.currentTime = 0;
+modalVideo.src = "";
+
+}
+
+
+/* ================= WATCH BUTTON ================= */
+
+document.querySelectorAll('.watch-btn').forEach(btn=>{
+
+btn.addEventListener('click',(e)=>{
+
+e.stopPropagation();
+btn.closest('.card-item')?.click();
+
+});
+
+});
+
+}
+
+
+/* ================= FULL PLAYER ================= */
+
+document.querySelector('.watch-now')
+?.addEventListener('click',()=>{
+
+if(currentMovie){
+window.location.href =
+"player.html?movie=" + encodeURIComponent(currentMovie);
+}
+
+});
+
+
+initSliders();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report a Problem - Devstar+</title>
+
+<style>
+
+/* ================= BASE ================= */
+body{
+  margin:0;
+  background:black;
+  font-family:Arial;
+  color:white;
+  padding:110px 30px 80px;
+}
+
+/* ================= TITLE ================= */
+.page-title{
+  font-size:48px;
+  font-weight:800;
+  text-align:center;
+  margin-bottom:10px;
+
+  background: linear-gradient(to right, #ffffff, #00A8FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub{
+  text-align:center;
+  color:#aaa;
+  max-width:700px;
+  margin:0 auto 50px;
+}
+
+/* ================= FORM BOX ================= */
+.form-box{
+  max-width:700px;
+  margin:auto;
+  background:#0f1624;
+  padding:35px;
+  border-radius:18px;
+  border:1px solid rgba(0,168,255,0.15);
+  transition:0.3s;
+}
+
+/* glow */
+.form-box:hover{
+  box-shadow:0 0 25px rgba(0,168,255,0.25);
+}
+
+/* ================= INPUT ================= */
+.input-group{
+  margin-bottom:20px;
+}
+
+.input-group label{
+  display:block;
+  font-size:14px;
+  margin-bottom:6px;
+  color:#ccc;
+}
+
+.input-group input,
+.input-group textarea{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #2a3446;
+  background:transparent;
+  color:white;
+  outline:none;
+  font-size:14px;
+  transition:0.2s;
+}
+
+/* focus */
+.input-group input:focus,
+.input-group textarea:focus{
+  border-color:#00A8FF;
+  box-shadow:0 0 8px rgba(0,168,255,0.3);
+}
+
+/* textarea */
+textarea{
+  resize:none;
+  height:120px;
+}
+
+/* ================= BUTTON ================= */
+.submit-btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#00A8FF,#0066ff);
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.submit-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 15px rgba(0,168,255,0.5);
+}
+
+/* ================= NOTE ================= */
+.note{
+  text-align:center;
+  margin-top:25px;
+  font-size:13px;
+  color:#888;
+}
+
+/* ================= SUCCESS ================= */
+.success{
+  display:none;
+  text-align:center;
+  margin-top:20px;
+  color:lime;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:600px){
+  .page-title{
+    font-size:32px;
+  }
+
+  body{
+    padding:100px 15px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= TITLE ================= -->
+<div class="page-title">Report a Problem</div>
+
+<p class="sub">
+Facing any issue while exploring Devstar+? Let us know so we can improve the experience.
+</p>
+
+<!-- ================= FORM ================= -->
+<div class="form-box">
+
+  <div class="input-group">
+    <label>Your Name</label>
+    <input type="text" placeholder="Enter your name">
+  </div>
+
+  <div class="input-group">
+    <label>Email</label>
+    <input type="email" placeholder="Enter your email">
+  </div>
+
+  <div class="input-group">
+    <label>Problem Type</label>
+    <input type="text" placeholder="e.g. Video not playing, UI bug">
+  </div>
+
+  <div class="input-group">
+    <label>Description</label>
+    <textarea placeholder="Describe the issue..."></textarea>
+  </div>
+
+  <button class="submit-btn" onclick="submitForm()">Submit Report</button>
+
+  <div class="success" id="successMsg">✅ Report submitted (Demo)</div>
+
+</div>
+
+<p class="note">
+This is a demo portfolio feature. No real data is stored.
+</p>
+
+<script>
+function submitForm(){
+  document.getElementById("successMsg").style.display = "block";
+}
+</script>
+
+</body>
+</html>

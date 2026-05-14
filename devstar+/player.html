@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hotstar Player</title>
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  font-family: Arial;
+}
+
+.playerOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+
+/* VIDEO AREA */
+.videoWrap {
+  position: absolute;
+  top: 60px;
+  bottom: 90px;
+  left: 25px;
+  right: 25px;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TOP BAR */
+.topBar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+}
+
+.quality {
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+/* BOTTOM */
+.controls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 25px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  box-sizing: border-box;
+}
+
+/* PROGRESS ROW */
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.progress {
+  height: 10px;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+.time {
+  flex-shrink: 0;
+  min-width: 110px;
+  text-align: right;
+  color: white;
+  font-size: 22px;
+}
+
+/* CONTROL ROW */
+.controlRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* LEFT BUTTONS */
+.leftControls {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+}
+
+/* RIGHT BUTTON */
+.rightControls {
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+  padding: 5px;
+}
+
+.rightControls:hover {
+  transform: scale(1.2);
+  transition: 0.2s;
+}
+
+/* BUTTON */
+.btn {
+  color: white;
+  cursor: pointer;
+  font-size: 22px;
+  padding: 5px 8px;
+}
+
+#playBtn {
+  font-size: 28px;
+}
+
+.btn:hover,
+.rightControls:hover {
+  transform: scale(1.15);
+  transition: 0.2s;
+}
+
+#volumeIcon {
+  width: 34px;
+  height: 34px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="playerOverlay">
+
+  <!-- TOP -->
+  <div class="topBar">
+    <div>Daredevil: Born Again</div>
+    <div class="quality">Quality • Full HD</div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="videoWrap">
+    <video id="video" autoplay ></video>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+
+    <div class="progressRow">
+      <input type="range" id="progress" class="progress" value="0">
+      <div class="time" id="time">0:00 / 0:00</div>
+    </div>
+
+    <div class="controlRow">
+
+      <!-- LEFT -->
+      <div class="leftControls">
+        <div class="btn" onclick="rewind()">⏪ 10</div>
+        <div class="btn" id="playBtn" onclick="togglePlay()">▶</div>
+        <div class="btn" onclick="forward()">10 ⏩</div>
+
+        <!-- 🔥 VOLUME (ONLY ADD) -->
+        <div class="btn" style="display:flex; align-items:center; gap:10px;">
+          <svg id="volumeIcon" onclick="toggleMute()" width="26" height="26" viewBox="0 0 24 24" fill="white" style="cursor:pointer;">
+            <path d="M3 9v6h4l5 5V4L7 9H3z"/>
+          </svg>
+
+          <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" style="width:100px; cursor:pointer;">
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="rightControls" onclick="fullScreen()">⛶</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+
+
+let video = document.getElementById("video");
+
+/* 🔥 URL SE VIDEO LO */
+const params = new URLSearchParams(window.location.search);
+const videoSrc = params.get("movie");
+
+console.log("VIDEO URL:", videoSrc); // debug
+
+/* 🔥 SET KARO + LOAD */
+if (videoSrc) {
+  video.src = videoSrc;
+  video.load();
+
+  // autoplay try
+  video.play().catch(() => {
+    console.log("Autoplay blocked (normal hai)");
+  });
+}
+let progress = document.getElementById("progress");
+let playBtn = document.getElementById("playBtn");
+let time = document.getElementById("time");
+
+/* 🔥 VOLUME ELEMENTS */
+let volumeSlider = document.getElementById("volumeSlider");
+let volumeIcon = document.getElementById("volumeIcon");
+
+/* AUTO PLAY + SOUND ON */
+video.muted = false;
+video.volume = 1;
+video.play();
+
+/* PLAY / PAUSE */
+function togglePlay() {
+  if (video.paused) {
+    video.play();
+    playBtn.innerHTML = "❚❚";
+  } else {
+    video.pause();
+    playBtn.innerHTML = "▶";
+  }
+}
+
+/* SEEK */
+function rewind() {
+  video.currentTime -= 10;
+}
+
+function forward() {
+  video.currentTime += 10;
+}
+
+/* 🔥 VOLUME SLIDER */
+volumeSlider.addEventListener("input", () => {
+  video.volume = volumeSlider.value;
+
+  if (video.volume == 0) {
+    video.muted = true;
+    volumeIcon.innerHTML = '<path d="M16 12l4 4m0-4l-4 4M3 9v6h4l5 5V4L7 9H3z"/>';
+  } else {
+    video.muted = false;
+    volumeIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3z"/>';
+  }
+});
+
+/* 🔥 MUTE CLICK */
+function toggleMute() {
+  video.muted = !video.muted;
+
+  if (video.muted) {
+    volumeSlider.value = 0;
+    volumeIcon.innerHTML = '<path d="M16 12l4 4m0-4l-4 4M3 9v6h4l5 5V4L7 9H3z"/>';
+  } else {
+    volumeSlider.value = 1;
+    video.volume = 1;
+    volumeIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3z"/>';
+  }
+}
+
+/* FORMAT TIME */
+function formatTime(sec) {
+  let m = Math.floor(sec / 60);
+  let s = Math.floor(sec % 60);
+  return m + ":" + (s < 10 ? "0" + s : s);
+}
+
+/* UPDATE */
+video.addEventListener("timeupdate", () => {
+  progress.value = (video.currentTime / video.duration) * 100;
+
+  time.innerHTML =
+    formatTime(video.currentTime) + " / " +
+    formatTime(video.duration || 0);
+});
+
+/* SEEK BAR */
+progress.addEventListener("input", () => {
+  video.currentTime = (progress.value / 100) * video.duration;
+});
+
+/* FULLSCREEN */
+function fullScreen() {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  }
+}
+</script>
+
+</body>
+</html>
