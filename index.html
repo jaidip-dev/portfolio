@@ -642,29 +642,27 @@ max-width:420px;
    .card{
 position:relative;
 z-index:1;
-
+}
 }
    
 .card::before{
-z-index:0;
-pointer-events:none; 
-}
+content:'';
+position:absolute;
+inset:0;
+padding:2px;
+border-radius:24px;
+background:linear-gradient(45deg,var(--pink),var(--blue),var(--cyan),#ff9a00);
 
-   
-.card img,
-.card h3,
-.card p,
-.card a,
-.card .btn{
-position:relative;
-z-index:2;
-}
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
 
-.card a{
-display:inline-block;
-pointer-events:auto;
-}
-}
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+
+/* FIX */
+pointer-events:none;
+}   
 /* =========================
    ABOUT
 ========================= */
@@ -1607,13 +1605,14 @@ Cinematic OTT-style portfolio inspired by Hotstar/Netflix.
 Modern UI with smooth animations and movie-style project showcase.
 </p>
 
-<a href="#" class="btn btn-primary">Live Demo</a>
+<a href="https://github.com/jaidip-dev/devstar" class="btn btn-primary">Live Demo</a>
 
 </div>
+   
 
 <div class="card">
 
-<img src="assets/desi-full.png">
+<img src="assets/desichat.webp">
 
 <h3>Travel Website</h3>
 
@@ -1629,7 +1628,7 @@ Interactive travel landing page design with smooth modern layout and visuals.
 
 <div class="card">
 
-<img src="assets/desi-full.png">
+<img src="assets/desichat.webp">
 
 <h3>Movie Platform</h3>
 
